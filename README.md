@@ -25,6 +25,7 @@
 | 10000         | 192           | 40.17% |
 | 15000         | 50           | 10.46% |
 | 20000         | 29           | 6.07% |
+| 30000         | 10           | 2.09% |
 
 ### Top Days
 
@@ -52,6 +53,8 @@
 | Wednesday | 9998 |
 | Tuesday | 9653 |
 | Monday | 9609 |
+
+![Average Steps per Weekday](avg_steps_per_weekday.png)
 
 ### Avg Steps per Month
 

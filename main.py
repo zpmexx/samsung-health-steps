@@ -96,7 +96,6 @@ def get_avg_steps_per_weekday(dates_steps):
     weekday_avg = dates_steps.groupby('weekday')['count'].mean().reset_index()
     weekday_avg['count'] = weekday_avg['count'].round(0).astype(int)
     weekday_avg = weekday_avg.sort_values('count', ascending=False)
-
     return weekday_avg
 
 def get_steps_per_month(dates_steps):
@@ -128,6 +127,21 @@ def plot_avg_steps_per_month(months_avg):
     # Save and show the plot
     output_path = "avg_steps_per_month.png"
     plt.savefig(output_path)
+
+def plot_avg_steps_per_weekday(avg_weekday_steps):
+    # Plotting average steps per weekday
+    plt.figure(figsize=(10, 5))
+    plt.bar(avg_weekday_steps['weekday'], avg_weekday_steps['count'], color='skyblue')
+    plt.title('Average Steps per Weekday')
+    plt.xlabel('Weekday')
+    plt.ylabel('Average Steps')
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+
+    # Save and show the plot
+    output_path = "avg_steps_per_weekday.png"
+    plt.savefig(output_path)
+
 
 # Load data from CSV files
 data = load_data()
@@ -196,9 +210,26 @@ markdown += "\n### Average Steps per Weekday\n\n"
 markdown += "| Weekday   | Average Steps |\n"
 markdown += "|-----------|----------------|\n"
 
-for _, row in get_avg_steps_per_weekday(dates_steps).iterrows():
+avg_weekday_steps = get_avg_steps_per_weekday(dates_steps)
+
+for _, row in avg_weekday_steps.iterrows():
     markdown += f"| {row['weekday']} | {row['count']} |\n"
 
+
+weekday_order = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+
+avg_weekday_steps['weekday'] = pd.Categorical(avg_weekday_steps['weekday'], categories=weekday_order, ordered=True)
+avg_weekday_steps = avg_weekday_steps.sort_values('weekday').reset_index(drop=True)
+
+plot_avg_steps_per_weekday(avg_weekday_steps)
+
+markdown += "\n![Average Steps per Weekday](avg_steps_per_weekday.png)\n"
+
+
+months_avg = get_steps_per_month(dates_steps)
+
+
+plot_avg_steps_per_month(months_avg)
 
 markdown += "\n### Avg Steps per Month\n\n"
 markdown += "![Average Steps per Month](avg_steps_per_month.png)\n"
@@ -214,7 +245,5 @@ markdown += configuration_markdown
 with open('README.md', 'w') as f:
     f.write(markdown)
     
-months_avg = get_steps_per_month(dates_steps)
 
-plot_avg_steps_per_month(months_avg)
 
