@@ -112,14 +112,43 @@ target_days_count, total_days_count = count_target_days(dates_steps)
 
 avg_steps = get_average_steps(dates_steps)
 median_steps = get_median_steps(dates_steps)
-top_steps = get_top_steps(dates_steps, main_config['top_number'])
+top_n_steps = get_top_steps(dates_steps, main_config['top_number'])
+
+
+#print(top_n_steps)
+
+
 
 avg_steps_per_month = get_avg_steps_per_month(dates_steps)
 # Print the results 
-print(get_avg_steps_per_weekday(dates_steps))
+#print(get_avg_steps_per_weekday(dates_steps))
 
 
-markdown = f"""[Configuration](#configuration)"""
+print(get_steps_list_to_compare(dates_steps))
+
+markdown = f"""[Configuration](#configuration)\n
+[Target Days Summary](#target-days-summary)\n"""
+
+
+
+markdown += f"""\n ### Overall Steps Summary\n
+|     Metric          |   Value     |
+|:------------------:|:-----------:|
+| Days               |   {total_days_count}    |
+| Average      |   {avg_steps}     |
+| Median       |   {median_steps}     |
+| Top           |  {top_n_steps['count'].max()}     |
+| Daily target           |  {main_config['steps_target']}    |
+"""
+
+markdown += f"""\n ### Target Days Summary\n\n"""
+markdown += "| Target Steps | Completed Days | % completed    |\n"
+markdown += "|--------------|----------------|-------|\n"
+for steps, (days, percent) in get_steps_list_to_compare(dates_steps).items():
+    markdown += f"| {steps}         | {days}           | {percent}% |\n"
+
+
+
 
 configuration_markdown = f"""
 # Configuration
@@ -127,3 +156,7 @@ configuration_markdown = f"""
 2. **Extract the zip file and copy the csv file named com.samsung.shealth.step_daily_trend.****.csv into project folder**
 3. **Run the main.py script**
 """
+markdown += configuration_markdown
+
+with open('README1.md', 'w') as f:
+    f.write(markdown)
