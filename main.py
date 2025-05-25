@@ -174,8 +174,8 @@ markdown = f"""[Configuration](#configuration) |
 [Target Days Summary](#target-days-summary) |
 [Overall Steps Summary](#overall-steps-summary) |
 [Top Days](#top-days) |
+[Average Steps per Weekday](#average-steps-per-weekday) |
 [Average Steps per Month](#average-steps-per-month)
-
 """
 
 
@@ -230,7 +230,7 @@ months_avg = get_steps_per_month(dates_steps)
 
 plot_avg_steps_per_month(months_avg)
 
-markdown += "\n### Average Steps per Month {#average-steps-per-month}\n\n"
+markdown += "\n### Average Steps per Month\n\n"
 markdown += "![Average Steps per Month](avg_steps_per_month.png)\n"
 
 configuration_markdown = f"""

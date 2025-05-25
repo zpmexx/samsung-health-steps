@@ -2,8 +2,8 @@
 [Target Days Summary](#target-days-summary) |
 [Overall Steps Summary](#overall-steps-summary) |
 [Top Days](#top-days) |
+[Average Steps per Weekday](#average-steps-per-weekday) |
 [Average Steps per Month](#average-steps-per-month)
-
 
  ### Overall Steps Summary
 
@@ -55,7 +55,7 @@
 
 ![Average Steps per Weekday](avg_steps_per_weekday.png)
 
-### Average Steps per Month {#average-steps-per-month}
+### Average Steps per Month
 
 ![Average Steps per Month](avg_steps_per_month.png)
 
