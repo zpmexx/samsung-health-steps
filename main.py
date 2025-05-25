@@ -231,7 +231,7 @@ months_avg = get_steps_per_month(dates_steps)
 
 plot_avg_steps_per_month(months_avg)
 
-markdown += "\n### Avg Steps per Month\n\n"
+markdown += "\n### Average Steps per Month\n\n"
 markdown += "![Average Steps per Month](avg_steps_per_month.png)\n"
 
 configuration_markdown = f"""
